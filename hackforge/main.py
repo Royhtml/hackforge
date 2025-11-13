@@ -35,6 +35,7 @@ from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 import traceback
 from datetime import datetime
+import webbrowser
 
 # Warna untuk UI yang lebih lengkap
 class Colors:
@@ -102,34 +103,29 @@ class AlatBantuPro:
 
     def show_ascii_art(self):
         ascii_art = f"""
-{Colors.RED}{Colors.BOLD}
-                                 ▒░░░             
-                                ░▒▒░░             
-                               ▒▒▒▒░░             
-                 ▒▒░░▒   ▒░░░░▒▒▒▒▒░▒             
-               ░░░░░░▒▒░░░░░░░░░▒▒▒▒              
-           ▒░░░░▒▒▒▒▒░░░░░░░░░░░░░▒▒▒             
-             ▒▒▓   ▒░▒░░▓▓▓▓▓▒░░░░░░▒▒            
-                  ▓░░░▓▓▓▓▒▓▓▓▓▓░░░░░▒            
-                  ▒░▒▓▓▒▓▓▓▓▓▒▓▓▓▒░░░░▒           
-                  ░░▓▓▒░▒▓▒▒▒▒▒▒▓▓▒░░░▒           
-                 ▒░▒▓▒▓░█░░░░▒█▓▓▓▓░░░▒▒          
-                 ▒░▒▓▓▒░░░░░░░░▒▓▓▓▓░░▒▒          
-                 ▒░▓▓▓▓░░░░░░░░▒▓▓▓░▒▒▒▓          
-                  ▒▓▓▓▓▒▒▒▒░░▒▓▓▓▓▒▒░░░▒                      
- _     _ _______ _______ _     _ _______  _____   ______  ______ _______
- |_____| |_____| |       |____/  |______ |     | |_____/ |  ____ |______
- |     | |     | |_____  |    \_ |       |_____| |    \_ |_____| |______                                                                       
-{Colors.END}
 {Colors.CYAN}{Colors.BOLD}
-    ╔══════════════════════════════════════════════════╗
-    ║                                                  ║
-    ║         █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█ █▀█ █▀▀ █▀▀      ║
-    ║         █▀█ █▀█ █▄▄ █░█ █▀░ █▄█ █▀▄ █▄█ ██▄      ║
-    ║                                                  ║
-    ║             PROFESSIONAL Hacker V2.0             ║
-    ║            Created by Dwi Bakti N Dev            ║
-    ╚══════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════╗
+║                              ▒░░░                ║
+║                             ░▒▒░░                ║
+║                            ▒▒▒▒░░                ║
+║              ▒▒░░▒   ▒░░░░▒▒▒▒▒░▒                ║
+║            ░░░░░░▒▒░░░░░░░░░▒▒▒▒                 ║
+║        ▒░░░░▒▒▒▒▒░░░░░░░░░░░░░▒▒▒                ║
+║          ▒▒▓   ▒░▒░░▓▓▓▓▓▒░░░░░░▒▒               ║
+║               ▓░░░▓▓▓▓▒▓▓▓▓▓░░░░░▒               ║
+║               ▒░▒▓▓▒▓▓▓▓▓▒▓▓▓▒░░░░▒              ║
+║               ░░▓▓▒░▒▓▒▒▒▒▒▒▓▓▒░░░▒              ║
+║              ▒░▒▓▒▓░█░░░░▒█▓▓▓▓░░░▒▒             ║
+║              ▒░▒▓▓▒░░░░░░░░▒▓▓▓▓░░▒▒             ║
+║              ▒░▓▓▓▓░░░░░░░░▒▓▓▓░▒▒▒▓             ║
+║               ▒▓▓▓▓▒▒▒▒░░▒▓▓▓▓▒▒░░░▒             ║         
+║                                                  ║
+║         █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█ █▀█ █▀▀ █▀▀      ║
+║         █▀█ █▀█ █▄▄ █░█ █▀░ █▄█ █▀▄ █▄█ ██▄      ║
+║                                                  ║
+║             PROFESSIONAL Hacker V2.5             ║
+║            Created by Dwi Bakti N Dev            ║
+╚══════════════════════════════════════════════════╝
 {Colors.END}
 """
         print(ascii_art)
@@ -194,11 +190,13 @@ class AlatBantuPro:
             print(f"{Colors.GREEN}15.{Colors.END} DDoS Attack Tools (Complete)")
             print(f"{Colors.GREEN}16.{Colors.END} Install Hacking Tools (Complete Collection)")
             print(f"{Colors.GREEN}17.{Colors.END} Run Installed Tools")
-            print(f"{Colors.GREEN}18.{Colors.END} Settings & Configuration")
-            print(f"{Colors.GREEN}19.{Colors.END} About & Help")
+            print(f"{Colors.GREEN}18.{Colors.END} Server Management (Apache & MariaDB)")
+            print(f"{Colors.GREEN}19.{Colors.END} Settings & Configuration")
+            print(f"{Colors.GREEN}20.{Colors.END} About & Help")
+            print(f"{Colors.GREEN}21.{Colors.END} Sound Management")  # New sound menu
             print(f"{Colors.GREEN}0.{Colors.END}  Keluar")
             
-            pilihan = input(f"\n{Colors.CYAN}➤ Pilih menu [0-19]: {Colors.END}").strip()
+            pilihan = input(f"\n{Colors.CYAN}➤ Pilih menu [0-21]: {Colors.END}").strip()
             
             menu_functions = {
                 "1": self.scan_lengkap,
@@ -218,8 +216,10 @@ class AlatBantuPro:
                 "15": self.ddos_attack_tools,
                 "16": self.install_hacking_tools,
                 "17": self.run_installed_tools,
-                "18": self.settings_configuration,
-                "19": self.about_help
+                "18": self.server_management,
+                "19": self.settings_configuration,
+                "20": self.about_help,
+                "21": self.sound_management  
             }
             
             if pilihan in menu_functions:
@@ -229,6 +229,690 @@ class AlatBantuPro:
             else:
                 self.print_result("Error", "Pilihan tidak valid!", "error")
                 input(f"\n{Colors.CYAN}Tekan Enter untuk melanjutkan...{Colors.END}")
+
+ 
+    def sound_management(self):
+        """Manage sound settings and playback"""
+        while True:
+            self.clear_screen()
+            self.banner()
+            
+            print(f"{Colors.CYAN}{Colors.BOLD}Sound Management:{Colors.END}")
+            print(f"{Colors.GREEN}1.{Colors.END}  Turn ON Sound")
+            print(f"{Colors.GREEN}2.{Colors.END}  Turn OFF Sound")
+            print(f"{Colors.GREEN}3.{Colors.END}  Test Sound")
+            print(f"{Colors.GREEN}4.{Colors.END}  Play Success Sound")
+            print(f"{Colors.GREEN}5.{Colors.END}  Play Error Sound")
+            print(f"{Colors.GREEN}6.{Colors.END}  Play Warning Sound")
+            print(f"{Colors.GREEN}7.{Colors.END}  Play Scan Complete Sound")
+            print(f"{Colors.GREEN}8.{Colors.END}  Check Sound Status")
+            print(f"{Colors.GREEN}9.{Colors.END}  Install Sound Dependencies")
+            print(f"{Colors.GREEN}0.{Colors.END}  Kembali ke Menu Utama")
+            
+            pilihan = input(f"\n{Colors.CYAN}➤ Pilih menu [0-9]: {Colors.END}").strip()
+            
+            sound_functions = {
+                "1": self.turn_sound_on,
+                "2": self.turn_sound_off,
+                "3": self.test_sound,
+                "4": self.play_success_sound,
+                "5": self.play_error_sound,
+                "6": self.play_warning_sound,
+                "7": self.play_scan_complete_sound,
+                "8": self.check_sound_status,
+                "9": self.install_sound_dependencies
+            }
+            
+            if pilihan in sound_functions:
+                sound_functions[pilihan]()
+            elif pilihan == "0":
+                break
+            else:
+                self.print_result("Error", "Pilihan tidak valid!", "error")
+            
+            input(f"\n{Colors.CYAN}Tekan Enter untuk melanjutkan...{Colors.END}")
+
+    def turn_sound_on(self):
+        """Turn sound ON"""
+        self.sound_enabled = True
+        self.save_setting('sound_enabled', 'True')
+        self.print_result("Success", "Sound telah diaktifkan!", "success")
+        self.play_success_sound()
+
+    def turn_sound_off(self):
+        """Turn sound OFF"""
+        self.sound_enabled = False
+        self.save_setting('sound_enabled', 'False')
+        self.print_result("Success", "Sound telah dimatikan!", "success")
+
+    def test_sound(self):
+        """Test sound functionality"""
+        self.print_result("Info", "Menguji sound system...", "info")
+        
+        # Test different sound methods
+        sounds_to_test = [
+            ("Success Sound", self.play_success_sound),
+            ("Error Sound", self.play_error_sound),
+            ("Warning Sound", self.play_warning_sound),
+            ("Scan Complete", self.play_scan_complete_sound)
+        ]
+        
+        for sound_name, sound_func in sounds_to_test:
+            print(f"{Colors.YELLOW}Testing: {sound_name}{Colors.END}")
+            sound_func()
+            input(f"{Colors.CYAN}Tekan Enter untuk test selanjutnya...{Colors.END}")
+        
+        self.print_result("Success", "Sound test completed!", "success")
+
+    def play_success_sound(self):
+        """Play success sound"""
+        if getattr(self, 'sound_enabled', False):
+            try:
+                # Using termux-beep for success sound
+                os.system("termux-beep -f 1000 -d 100 -n 3")
+            except:
+                self.fallback_beep_sound(1)
+
+    def play_error_sound(self):
+        """Play error sound"""
+        if getattr(self, 'sound_enabled', False):
+            try:
+                # Low frequency beep for error
+                os.system("termux-beep -f 300 -d 500 -n 1")
+            except:
+                self.fallback_beep_sound(2)
+
+    def play_warning_sound(self):
+        """Play warning sound"""
+        if getattr(self, 'sound_enabled', False):
+            try:
+                # Medium frequency beep for warning
+                os.system("termux-beep -f 800 -d 200 -n 2")
+            except:
+                self.fallback_beep_sound(3)
+
+    def play_scan_complete_sound(self):
+        """Play scan complete sound"""
+        if getattr(self, 'sound_enabled', False):
+            try:
+                # Complex pattern for scan complete
+                os.system("termux-beep -f 600 -d 100")
+                os.system("termux-beep -f 800 -d 100")
+                os.system("termux-beep -f 1000 -d 200")
+            except:
+                self.fallback_beep_sound(4)
+
+    def fallback_beep_sound(self, sound_type):
+        """Fallback sound using print beeps"""
+        if getattr(self, 'sound_enabled', False):
+            try:
+                if sound_type == 1:  # Success
+                    print("\a" * 2)  # System beep
+                elif sound_type == 2:  # Error
+                    print("\a")  # Single system beep
+                elif sound_type == 3:  # Warning
+                    print("\a\a")  # Double beep
+                elif sound_type == 4:  # Scan complete
+                    print("\a\a\a")  # Triple beep
+            except:
+                pass  # Silent fail if sound not available
+
+    def check_sound_status(self):
+        """Check sound system status"""
+        sound_status = "AKTIF" if getattr(self, 'sound_enabled', False) else "NON-AKTIF"
+        
+        print(f"\n{Colors.CYAN}Sound System Status:{Colors.END}")
+        print(f"{Colors.GREEN}Status:{Colors.END} {sound_status}")
+        
+        # Check termux-api availability
+        try:
+            result = subprocess.run(["termux-beep", "--help"], 
+                                capture_output=True, text=True)
+            if result.returncode == 0:
+                print(f"{Colors.GREEN}Termux-API:{Colors.END} Terinstall")
+            else:
+                print(f"{Colors.RED}Termux-API:{Colors.END} Tidak terinstall")
+        except:
+            print(f"{Colors.RED}Termux-API:{Colors.END} Tidak tersedia")
+        
+        # Check system sound capability
+        try:
+            print("\a")  # System bell test
+            print(f"{Colors.GREEN}System Bell:{Colors.END} Bekerja")
+        except:
+            print(f"{Colors.RED}System Bell:{Colors.END} Tidak bekerja")
+
+    def install_sound_dependencies(self):
+        """Install required packages for sound"""
+        self.print_result("Info", "Menginstall dependencies sound...", "info")
+        
+        try:
+            # Update package list
+            os.system("pkg update -y")
+            
+            # Install termux-api
+            os.system("pkg install termux-api -y")
+            
+            # Install additional audio tools
+            os.system("pkg install sox -y")  # Sound processing
+            os.system("pkg install mpv -y")  # Media player
+            
+            self.print_result("Success", "Dependencies sound berhasil diinstall!", "success")
+            self.play_success_sound()
+            
+        except Exception as e:
+            self.print_result("Error", f"Gagal install dependencies: {str(e)}", "error")
+
+    def load_sound_settings(self):
+        """Load sound settings from configuration"""
+        try:
+            sound_setting = self.load_setting('sound_enabled')
+            self.sound_enabled = sound_setting.lower() == 'true' if sound_setting else True
+        except:
+            self.sound_enabled = True  # Default enabled
+
+    # Add sound playback to existing functions
+    def print_result(self, title, message, message_type):
+        """Enhanced print_result with sound support"""
+        # Original printing logic here...
+        
+        # Add sound based on message type
+        if hasattr(self, 'sound_enabled') and self.sound_enabled:
+            if message_type == "success":
+                self.play_success_sound()
+            elif message_type == "error":
+                self.play_error_sound()
+            elif message_type == "warning":
+                self.play_warning_sound()
+            elif message_type == "info":
+                self.play_scan_complete_sound()
+    def server_management(self):
+        """Menu manajemen server Apache dan MariaDB"""
+        while True:
+            self.clear_screen()
+            print(f"{Colors.CYAN}{Colors.BOLD}Server Management:{Colors.END}")
+            print(f"{Colors.GREEN}1.{Colors.END}  Start Apache Server")
+            print(f"{Colors.GREEN}2.{Colors.END}  Stop Apache Server")
+            print(f"{Colors.GREEN}3.{Colors.END}  Restart Apache Server")
+            print(f"{Colors.GREEN}4.{Colors.END}  Start MariaDB Server")
+            print(f"{Colors.GREEN}5.{Colors.END}  Stop MariaDB Server")
+            print(f"{Colors.GREEN}6.{Colors.END}  Restart MariaDB Server")
+            print(f"{Colors.GREEN}7.{Colors.END}  Status Apache & MariaDB")
+            print(f"{Colors.GREEN}8.{Colors.END}  Akses phpMyAdmin")
+            print(f"{Colors.GREEN}9.{Colors.END}  Install LAMP Stack (Jika belum ada)")
+            print(f"{Colors.GREEN}10.{Colors.END} Install di Termux (Android)")
+            print(f"{Colors.GREEN}11.{Colors.END} Running Project PHP")
+            print(f"{Colors.GREEN}0.{Colors.END}  Kembali ke Menu Utama")
+            
+            pilihan = input(f"\n{Colors.CYAN}➤ Pilih opsi [0-11]: {Colors.END}").strip()
+            
+            if pilihan == "1":
+                self.start_apache()
+            elif pilihan == "2":
+                self.stop_apache()
+            elif pilihan == "3":
+                self.restart_apache()
+            elif pilihan == "4":
+                self.start_mariadb()
+            elif pilihan == "5":
+                self.stop_mariadb()
+            elif pilihan == "6":
+                self.restart_mariadb()
+            elif pilihan == "7":
+                self.check_server_status()
+            elif pilihan == "8":
+                self.access_phpmyadmin()
+            elif pilihan == "9":
+                self.install_lamp_stack()
+            elif pilihan == "10":
+                self.install_termux()
+            elif pilihan == "11":
+                self.run_php_project()
+            elif pilihan == "0":
+                break
+            else:
+                self.print_result("Error", "Pilihan tidak valid!", "error")
+            
+            input(f"\n{Colors.CYAN}Tekan Enter untuk melanjutkan...{Colors.END}")
+
+    def detect_termux(self):
+        """Mendeteksi apakah running di Termux"""
+        return os.path.exists('/data/data/com.termux/files/usr/bin/pkg')
+
+    def start_apache(self):
+        """Menjalankan Apache server"""
+        try:
+            self.print_result("Info", "Menjalankan Apache server...", "info")
+            
+            # Untuk Termux
+            if self.detect_termux():
+                # Hentikan proses yang mungkin masih running
+                os.system('pkill -f apache2 > /dev/null 2>&1')
+                os.system('pkill -f httpd > /dev/null 2>&1')
+                
+                # Start Apache
+                result = os.system('apachectl -k start > /dev/null 2>&1')
+                if result == 0:
+                    self.print_result("Success", "Apache server berhasil dijalankan di Termux!", "success")
+                else:
+                    # Coba alternatif
+                    result = os.system('httpd -D FOREGROUND > /dev/null 2>&1 &')
+                    if result == 0:
+                        self.print_result("Success", "Apache server berhasil dijalankan!", "success")
+                    else:
+                        self.print_result("Error", "Gagal menjalankan Apache server di Termux!", "error")
+            
+            # Untuk Linux
+            elif os.name == 'posix':
+                result = os.system('sudo systemctl start apache2')
+                if result == 0:
+                    self.print_result("Success", "Apache server berhasil dijalankan!", "success")
+                else:
+                    self.print_result("Error", "Gagal menjalankan Apache server!", "error")
+            
+            # Untuk Windows
+            elif os.name == 'nt':
+                result = os.system('net start "Apache2.4"')
+                if result == 0:
+                    self.print_result("Success", "Apache server berhasil dijalankan!", "success")
+                else:
+                    self.print_result("Warning", "Coba menjalankan sebagai service...", "warning")
+                    os.system('sc start Apache2.4')
+            
+            else:
+                self.print_result("Error", "Sistem operasi tidak didukung!", "error")
+                
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+
+    def start_mariadb(self):
+        """Menjalankan MariaDB server"""
+        try:
+            self.print_result("Info", "Menjalankan MariaDB server...", "info")
+            
+            if self.detect_termux():
+                # Hentikan proses yang mungkin masih running
+                os.system('pkill -f mysqld > /dev/null 2>&1')
+                os.system('pkill -f mysql > /dev/null 2>&1')
+                
+                # Start MariaDB dengan socket yang benar untuk Termux
+                mysql_dir = '/data/data/com.termux/files/usr/var/lib/mysql'
+                mysql_socket = '/data/data/com.termux/files/usr/tmp/mysqld.sock'
+                
+                # Pastikan direktori exists
+                os.system(f'mkdir -p {mysql_dir}')
+                os.system(f'mkdir -p /data/data/com.termux/files/usr/tmp')
+                
+                # Start MariaDB
+                result = os.system(f'mysqld_safe --datadir={mysql_dir} --socket={mysql_socket} --skip-networking > /dev/null 2>&1 &')
+                
+                # Tunggu beberapa detik
+                time.sleep(3)
+                
+                # Cek apakah berhasil running
+                if os.system('pgrep mysqld > /dev/null 2>&1') == 0:
+                    self.print_result("Success", "MariaDB server berhasil dijalankan di Termux!", "success")
+                    
+                    # Setup user root jika pertama kali
+                    self.setup_mariadb_root()
+                else:
+                    self.print_result("Error", "Gagal menjalankan MariaDB server di Termux!", "error")
+            
+            elif os.name == 'posix':
+                result = os.system('sudo systemctl start mariadb')
+                if result == 0:
+                    self.print_result("Success", "MariaDB server berhasil dijalankan!", "success")
+                else:
+                    # Coba dengan mysql (beberapa distro menggunakan mysql untuk mariadb)
+                    result = os.system('sudo systemctl start mysql')
+                    if result == 0:
+                        self.print_result("Success", "MySQL/MariaDB server berhasil dijalankan!", "success")
+                    else:
+                        self.print_result("Error", "Gagal menjalankan MariaDB/MySQL server!", "error")
+            
+            elif os.name == 'nt':
+                result = os.system('net start "MariaDB"')
+                if result == 0:
+                    self.print_result("Success", "MariaDB server berhasil dijalankan!", "success")
+                else:
+                    os.system('sc start MariaDB')
+            
+            else:
+                self.print_result("Error", "Sistem operasi tidak didukung!", "error")
+                
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+
+    def setup_mariadb_root(self):
+        """Setup user root untuk MariaDB di Termux"""
+        try:
+            self.print_result("Info", "Setup user root MariaDB...", "info")
+            
+            mysql_socket = '/data/data/com.termux/files/usr/tmp/mysqld.sock'
+            
+            # Tunggu sebentar untuk memastikan MySQL sudah ready
+            time.sleep(2)
+            
+            # Setup password root (kosongkan password untuk kemudahan)
+            result = os.system(f'mysql -S {mysql_socket} -u root -e "ALTER USER \\"root\\"@\\"localhost\\" IDENTIFIED BY \\"\\";" > /dev/null 2>&1')
+            
+            if result == 0:
+                self.print_result("Success", "User root MariaDB berhasil disetup!", "success")
+            else:
+                # Jika gagal, coba secure installation
+                os.system(f'mysql_secure_installation -S {mysql_socket}')
+                
+        except Exception as e:
+            self.print_result("Warning", f"Setup user root: {str(e)}", "warning")
+
+    def install_termux(self):
+        """Install dan setup LAMP stack di Termux"""
+        try:
+            if not self.detect_termux():
+                self.print_result("Error", "Fitur ini hanya untuk Termux (Android)!", "error")
+                return
+                
+            self.print_result("Info", "Menginstall LAMP Stack di Termux...", "info")
+            
+            # Update package
+            self.print_result("Info", "Update package Termux...", "info")
+            os.system('pkg update -y && pkg upgrade -y')
+            
+            # Install packages
+            self.print_result("Info", "Install Apache, PHP, MariaDB...", "info")
+            os.system('pkg install -y apache2 php mariadb php-apache phpmyadmin')
+            
+            # Setup Apache untuk PHP
+            self.print_result("Info", "Setup Apache configuration...", "info")
+            
+            # Backup httpd.conf
+            os.system('cp /data/data/com.termux/files/usr/etc/apache2/httpd.conf /data/data/com.termux/files/usr/etc/apache2/httpd.conf.backup')
+            
+            # Buat httpd.conf baru yang lebih sederhana
+            httpd_conf = '''LoadModule mpm_prefork_module libexec/apache2/mod_mpm_prefork.so
+    LoadModule authn_file_module libexec/apache2/mod_authn_file.so
+    LoadModule authn_core_module libexec/apache2/mod_authn_core.so
+    LoadModule authz_host_module libexec/apache2/mod_authz_host.so
+    LoadModule authz_groupfile_module libexec/apache2/mod_authz_groupfile.so
+    LoadModule authz_user_module libexec/apache2/mod_authz_user.so
+    LoadModule authz_core_module libexec/apache2/mod_authz_core.so
+    LoadModule access_compat_module libexec/apache2/mod_access_compat.so
+    LoadModule auth_basic_module libexec/apache2/mod_auth_basic.so
+    LoadModule reqtimeout_module libexec/apache2/mod_reqtimeout.so
+    LoadModule filter_module libexec/apache2/mod_filter.so
+    LoadModule mime_module libexec/apache2/mod_mime.so
+    LoadModule log_config_module libexec/apache2/mod_log_config.so
+    LoadModule env_module libexec/apache2/mod_env.so
+    LoadModule headers_module libexec/apache2/mod_headers.so
+    LoadModule setenvif_module libexec/apache2/mod_setenvif.so
+    LoadModule version_module libexec/apache2/mod_version.so
+    LoadModule unixd_module libexec/apache2/mod_unixd.so
+    LoadModule status_module libexec/apache2/mod_status.so
+    LoadModule autoindex_module libexec/apache2/mod_autoindex.so
+    LoadModule dir_module libexec/apache2/mod_dir.so
+    LoadModule alias_module libexec/apache2/mod_alias.so
+
+    LoadModule php_module libexec/apache2/libphp.so
+
+    ServerRoot "/data/data/com.termux/files/usr"
+
+    Listen 8080
+
+    User $(whoami)
+    Group $(whoami)
+
+    ServerAdmin admin@localhost
+
+    DocumentRoot "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
+
+    <Directory "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    <IfModule dir_module>
+        DirectoryIndex index.html index.php
+    </IfModule>
+
+    <Files ".ht*">
+        Require all denied
+    </Files>
+
+    ErrorLog "/data/data/com.termux/files/usr/var/log/apache2/error.log"
+
+    LogLevel warn
+
+    <IfModule log_config_module>
+        LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+        LogFormat "%h %l %u %t \"%r\" %>s %b" common
+        CustomLog "/data/data/com.termux/files/usr/var/log/apache2/access.log" common
+    </IfModule>
+
+    <IfModule mime_module>
+        TypesConfig /data/data/com.termux/files/usr/etc/apache2/mime.types
+        AddType application/x-compress .Z
+        AddType application/x-gzip .gz .tgz
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php-source .phps
+    </IfModule>
+    '''
+            
+            # Tulis httpd.conf
+            with open('/data/data/com.termux/files/usr/etc/apache2/httpd.conf', 'w') as f:
+                f.write(httpd_conf)
+            
+            # Setup PHP
+            self.print_result("Info", "Setup PHP configuration...", "info")
+            
+            # Tambah extension di php.ini
+            php_ini_commands = [
+                'echo "extension=mysqli" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "extension=pdo_mysql" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "extension=gd" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "extension=mbstring" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "extension=zip" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "memory_limit=256M" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "upload_max_filesize=64M" >> /data/data/com.termux/files/usr/etc/php.ini',
+                'echo "post_max_size=64M" >> /data/data/com.termux/files/usr/etc/php.ini'
+            ]
+            
+            for cmd in php_ini_commands:
+                os.system(cmd)
+            
+            # Setup MariaDB di Termux
+            self.print_result("Info", "Setup MariaDB di Termux...", "info")
+            
+            mysql_dir = '/data/data/com.termux/files/usr/var/lib/mysql'
+            mysql_socket = '/data/data/com.termux/files/usr/tmp/mysqld.sock'
+            
+            # Buat direktori yang diperlukan
+            os.system(f'mkdir -p {mysql_dir}')
+            os.system('mkdir -p /data/data/com.termux/files/usr/tmp')
+            os.system('mkdir -p /data/data/com.termux/files/usr/var/run/mariadb')
+            
+            # Install database system
+            self.print_result("Info", "Initialize MariaDB database...", "info")
+            result = os.system(f'mysql_install_db --user=$(whoami) --datadir={mysql_dir} > /dev/null 2>&1')
+            
+            if result == 0:
+                self.print_result("Success", "MariaDB database berhasil diinitialize!", "success")
+            else:
+                self.print_result("Warning", "Initialize database mungkin sudah ada", "warning")
+            
+            # Buat direktori web default
+            os.system('mkdir -p /data/data/com.termux/files/usr/share/apache2/default-site/htdocs')
+            
+            # Buat file info.php
+            with open('/data/data/com.termux/files/usr/share/apache2/default-site/htdocs/info.php', 'w') as f:
+                f.write('<?php phpinfo(); ?>')
+            
+            # Buat file index.php default
+            with open('/data/data/com.termux/files/usr/share/apache2/default-site/htdocs/index.php', 'w') as f:
+                f.write('''<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Termux LAMP Stack</title>
+    </head>
+    <body>
+        <h1>LAMP Stack di Termux Berhasil!</h1>
+        <p>Apache, PHP, dan MariaDB berhasil diinstall.</p>
+        <ul>
+            <li><a href="info.php">PHP Info</a></li>
+            <li><a href="/phpmyadmin">phpMyAdmin</a></li>
+        </ul>
+    </body>
+    </html>''')
+            
+            # Set permissions
+            os.system('chmod -R 755 /data/data/com.termux/files/usr/share/apache2/default-site/htdocs')
+            
+            self.print_result("Success", "LAMP Stack berhasil diinstall di Termux!", "success")
+            print(f"\n{Colors.YELLOW}Informasi Penting:{Colors.END}")
+            print(f"• Document Root: /data/data/com.termux/files/usr/share/apache2/default-site/htdocs")
+            print(f"• Port: 8080")
+            print(f"• URL: http://localhost:8080")
+            print(f"• PHP Info: http://localhost:8080/info.php")
+            print(f"• phpMyAdmin: http://localhost:8080/phpmyadmin")
+            print(f"\n{Colors.GREEN}Langkah selanjutnya:{Colors.END}")
+            print(f"1. Start Apache (Pilih menu 1)")
+            print(f"2. Start MariaDB (Pilih menu 4)")
+            print(f"3. Buka browser ke: http://localhost:8080")
+            
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+
+    def run_php_project(self):
+        """Menjalankan project PHP dari direktori tertentu"""
+        try:
+            self.clear_screen()
+            print(f"{Colors.CYAN}{Colors.BOLD}Running PHP Project:{Colors.END}")
+            
+            if self.detect_termux():
+                document_root = "/data/data/com.termux/files/usr/share/apache2/default-site/htdocs"
+            else:
+                document_root = "/var/www/html" if os.name == 'posix' else "C:\\xampp\\htdocs"
+            
+            print(f"\nDocument Root default: {document_root}")
+            print(f"\n{Colors.YELLOW}Pilih opsi:{Colors.END}")
+            print(f"{Colors.GREEN}1.{Colors.END} Gunakan Document Root default")
+            print(f"{Colors.GREEN}2.{Colors.END} Pilih direktori manual")
+            
+            pilihan = input(f"\n{Colors.CYAN}➤ Pilih opsi [1-2]: {Colors.END}").strip()
+            
+            if pilihan == "1":
+                project_dir = document_root
+            elif pilihan == "2":
+                project_dir = input(f"{Colors.CYAN}➤ Masukkan path direktori project: {Colors.END}").strip()
+                if not os.path.exists(project_dir):
+                    self.print_result("Error", "Direktori tidak ditemukan!", "error")
+                    return
+            else:
+                self.print_result("Error", "Pilihan tidak valid!", "error")
+                return
+            
+            # Pastikan server Apache running
+            self.print_result("Info", "Memastikan Apache server running...", "info")
+            self.start_apache()
+            
+            # Jika di Termux, copy project ke document root
+            if self.detect_termux():
+                self.print_result("Info", f"Copy project ke {document_root}...", "info")
+                os.system(f'cp -r {project_dir}/* {document_root}/ 2>/dev/null')
+                os.system(f'cp -r {project_dir}/.htaccess {document_root}/ 2>/dev/null')
+            
+            self.print_result("Success", "Project PHP siap diakses!", "success")
+            print(f"\n{Colors.YELLOW}Informasi:{Colors.END}")
+            print(f"• URL: http://localhost:8080")
+            print(f"• Direktori: {project_dir}")
+            print(f"\n{Colors.GREEN}Tekan Ctrl+C di terminal untuk menghentikan server{Colors.END}")
+            
+            # Jika di Linux/Windows, berikan petunjuk
+            if not self.detect_termux():
+                print(f"\n{Colors.YELLOW}Catatan:{Colors.END}")
+                print(f"• Pastikan project sudah berada di: {document_root}")
+                print(f"• Akses via: http://localhost")
+            
+            # Tawarkan untuk membuka browser
+            buka_browser = input(f"\n{Colors.CYAN}➤ Buka di browser sekarang? (y/n): {Colors.END}").strip().lower()
+            if buka_browser == 'y':
+                if self.detect_termux():
+                    # Di Termux, kita tidak bisa langsung buka browser
+                    self.print_result("Info", "Di Termux, buka browser manual di device lain:", "info")
+                    print(f"URL: http://[IP_TERMUX]:8080")
+                    print(f"Cek IP Termux dengan: ifconfig atau ip addr")
+                else:
+                    import webbrowser
+                    webbrowser.open("http://localhost:8080")
+                    
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+
+    def check_server_status(self):
+        """Memeriksa status Apache dan MariaDB"""
+        try:
+            self.print_result("Info", "Memeriksa status server...", "info")
+            
+            print(f"\n{Colors.YELLOW}{Colors.BOLD}Status Server:{Colors.END}")
+            print(f"{Colors.CYAN}{'='*50}{Colors.END}")
+            
+            if self.detect_termux():
+                # Check Apache status di Termux
+                apache_status = os.system('pgrep -f "apache2|httpd" > /dev/null 2>&1')
+                apache_status_text = "Running" if apache_status == 0 else "Stopped"
+                apache_color = Colors.GREEN if apache_status == 0 else Colors.RED
+                print(f"Apache Server: {apache_color}{apache_status_text}{Colors.END}")
+                
+                # Check MariaDB status di Termux
+                mariadb_status = os.system('pgrep -f "mysqld" > /dev/null 2>&1')
+                mariadb_status_text = "Running" if mariadb_status == 0 else "Stopped"
+                mariadb_color = Colors.GREEN if mariadb_status == 0 else Colors.RED
+                print(f"MariaDB Server: {mariadb_color}{mariadb_status_text}{Colors.END}")
+                
+                # Tampilkan info penting untuk Termux
+                print(f"\n{Colors.YELLOW}Info Termux:{Colors.END}")
+                print(f"• Document Root: /data/data/com.termux/files/usr/share/apache2/default-site/htdocs")
+                print(f"• Port: 8080")
+                print(f"• URL: http://localhost:8080")
+                print(f"• phpMyAdmin: http://localhost:8080/phpmyadmin")
+                
+                # Tampilkan IP address untuk akses dari device lain
+                print(f"\n{Colors.YELLOW}Akses dari device lain:{Colors.END}")
+                os.system('ip addr show | grep inet | grep global')
+            
+            elif os.name == 'posix':
+                # Check Apache status
+                apache_status = os.system('sudo systemctl is-active --quiet apache2')
+                apache_status_text = "Running" if apache_status == 0 else "Stopped"
+                apache_color = Colors.GREEN if apache_status == 0 else Colors.RED
+                print(f"Apache Server: {apache_color}{apache_status_text}{Colors.END}")
+                
+                # Check MariaDB/MySQL status
+                mariadb_status = os.system('sudo systemctl is-active --quiet mariadb')
+                if mariadb_status != 0:
+                    mariadb_status = os.system('sudo systemctl is-active --quiet mysql')
+                
+                mariadb_status_text = "Running" if mariadb_status == 0 else "Stopped"
+                mariadb_color = Colors.GREEN if mariadb_status == 0 else Colors.RED
+                print(f"MariaDB/MySQL: {mariadb_color}{mariadb_status_text}{Colors.END}")
+                
+            elif os.name == 'nt':
+                # Check Apache status on Windows
+                apache_result = os.system('sc query Apache2.4 > nul 2>&1')
+                apache_status_text = "Running" if apache_result == 0 else "Stopped"
+                apache_color = Colors.GREEN if apache_result == 0 else Colors.RED
+                print(f"Apache Server: {apache_color}{apache_status_text}{Colors.END}")
+                
+                # Check MariaDB status on Windows
+                mariadb_result = os.system('sc query MariaDB > nul 2>&1')
+                mariadb_status_text = "Running" if mariadb_result == 0 else "Stopped"
+                mariadb_color = Colors.GREEN if mariadb_result == 0 else Colors.RED
+                print(f"MariaDB Server: {mariadb_color}{mariadb_status_text}{Colors.END}")
+            
+            print(f"{Colors.CYAN}{'='*50}{Colors.END}")
+            
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
 
     def ddos_attack_tools(self):
         """Menu utama untuk tools DDoS attack yang ditingkatkan"""

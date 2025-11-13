@@ -19,21 +19,132 @@ class Colors:
     RESET = '\033[0m'
     BOLD = '\033[1m'
 
+class SoundPlayer:
+    """Class untuk memutar sound di Termux"""
+    
+    @staticmethod
+    def check_sound_dependencies():
+        """Cek apakah termux-api tersedia untuk sound"""
+        try:
+            # Cek apakah termux-api terinstall
+            result = subprocess.run(["termux-media-player"], 
+                                  capture_output=True, text=True)
+            return result.returncode != 127  # 127 means command not found
+        except:
+            return False
+    
+    @staticmethod
+    def play_sound(sound_type="success"):
+        """Memutar sound berdasarkan jenis"""
+        if not SoundPlayer.check_sound_dependencies():
+            return False
+            
+        try:
+            sound_files = {
+                "success": "berhasil.wav",
+                "error": "error.wav",
+                "warning": "warning.wav",
+                "complete": "complite.wav",
+                "startup": "start.wav"
+            }
+            
+            url = sound_files.get(sound_type, sound_files["success"])
+            
+            # Download dan play sound menggunakan termux-media-player
+            subprocess.Popen([
+                "curl", "-s", url, "-o", "/tmp/temp_sound.wav"
+            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            
+            time.sleep(0.5)
+            
+            # Play sound
+            subprocess.Popen([
+                "termux-media-player", "play", "/tmp/temp_sound.wav"
+            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            
+            return True
+        except:
+            return False
+    
+    @staticmethod
+    def play_beep(frequency=1000, duration=200):
+        """Memutar beep sound menggunakan termux-beep"""
+        try:
+            subprocess.Popen([
+                "termux-beep", "-f", str(frequency), "-d", str(duration)
+            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True
+        except:
+            return False
+    
+    @staticmethod
+    def play_vibration(duration=500):
+        """Memutar vibration"""
+        try:
+            subprocess.Popen([
+                "termux-vibrate", "-d", str(duration)
+            ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True
+        except:
+            return False
+    
+    @staticmethod
+    def play_complex_sound(sound_type="success"):
+        """Memutar sound dengan kombinasi beep dan vibration"""
+        sounds = {
+            "success": {"freq": 1000, "duration": 300, "vibrate": 200},
+            "error": {"freq": 500, "duration": 500, "vibrate": 500},
+            "warning": {"freq": 800, "duration": 200, "vibrate": 300},
+            "complete": {"freq": 1200, "duration": 400, "vibrate": 400},
+            "startup": {"freq": 1500, "duration": 100, "vibrate": 100}
+        }
+        
+        config = sounds.get(sound_type, sounds["success"])
+        
+        # Play vibration
+        SoundPlayer.play_vibration(config["vibrate"])
+        
+        # Play beep
+        SoundPlayer.play_beep(config["freq"], config["duration"])
+        
+        return True
+
 def show_ascii_art():
     """Menampilkan ASCII art"""
     ascii_art = f"""
 {Colors.CYAN}
-╔══════════════════════════════════════════════╗
-║            HACKFORGE INSTALLER               ║
-║        Dependency Installation Tool          ║
-║                                              ║
-║    [•] Installing required packages...       ║
-║    [•] Setting up environment...             ║
-║    [•] Preparing tools...                    ║
-╚══════════════════════════════════════════════╝
+╔═════════════════════════════════════╗
+║                       ▒░░░          ║
+║                      ░▒▒░░          ║
+║                     ▒▒▒▒░░          ║
+║       ▒▒░░▒   ▒░░░░▒▒▒▒▒░▒          ║
+║     ░░░░░░▒▒░░░░░░░░░▒▒▒▒           ║
+║ ▒░░░░▒▒▒▒▒░░░░░░░░░░░░░▒▒▒          ║
+║   ▒▒▓   ▒░▒░░▓▓▓▓▓▒░░░░░░▒▒         ║
+║        ▓░░░▓▓▓▓▒▓▓▓▓▓░░░░░▒         ║
+║        ▒░▒▓▓▒▓▓▓▓▓▒▓▓▓▒░░░░▒        ║
+║        ░░▓▓▒░▒▓▒▒▒▒▒▒▓▓▒░░░▒        ║
+║       ▒░▒▓▒▓░█░░░░▒█▓▓▓▓░░░▒▒       ║
+║       ▒░▒▓▓▒░░░░░░░░▒▓▓▓▓░░▒▒       ║
+║       ▒░▓▓▓▓░░░░░░░░▒▓▓▓░▒▒▒▓       ║
+║        ▒▓▓▓▓▒▒▒▒░░▒▓▓▓▓▒▒░░░▒       ║
+║                                     ║
+║ █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█ █▀█ █▀▀ █▀▀ ║
+║ █▀█ █▀█ █▄▄ █░█ █▀░ █▄█ █▀▄ █▄█ ██▄ ║
+║                                     ║
+║         HACKFORGE INSTALLER         ║
+║    Dependency Installation Tool     ║
+║                                     ║
+║[•] Installing required packages...  ║
+║[•] Setting up environment...        ║
+║[•] Preparing tools...               ║
+╚═════════════════════════════════════╝
 {Colors.RESET}
     """
     print(ascii_art)
+    
+    # Play startup sound
+    SoundPlayer.play_complex_sound("startup")
 
 def animate_selection(choice):
     """Animasi ketika memilih menu"""
@@ -53,6 +164,9 @@ def animate_selection(choice):
         time.sleep(0.1)
     print(f"\r{Colors.GREEN}✓✓✓✓✓{Colors.RESET} {Colors.BOLD}{text}{Colors.RESET}")
     print(f"{Colors.MAGENTA}{'='*50}{Colors.RESET}")
+    
+    # Play selection sound
+    SoundPlayer.play_complex_sound("success")
     time.sleep(0.5)
 
 def animate_bar_chart(title, duration=2, width=40):
@@ -121,17 +235,29 @@ def run_command(command, description):
                               timeout=120)
         loading_thread.join(timeout=0.1)
         print(f"\r{Colors.GREEN}✓{Colors.RESET} {description} - Berhasil!")
+        
+        # Play success sound
+        SoundPlayer.play_complex_sound("success")
+        
         if result.stdout:
             print(f"{Colors.GREEN}   Output: {result.stdout.strip()}{Colors.RESET}")
         return True, result.stdout
     except subprocess.CalledProcessError as e:
         loading_thread.join(timeout=0.1)
         print(f"\r{Colors.RED}✗{Colors.RESET} {description} - Gagal!")
+        
+        # Play error sound
+        SoundPlayer.play_complex_sound("error")
+        
         print(f"{Colors.RED}   Error: {e.stderr.strip()}{Colors.RESET}")
         return False, e.stderr
     except subprocess.TimeoutExpired:
         loading_thread.join(timeout=0.1)
         print(f"\r{Colors.RED}✗{Colors.RESET} {description} - Timeout!")
+        
+        # Play error sound
+        SoundPlayer.play_complex_sound("error")
+        
         return False, "Command timeout"
 
 def check_python_package(package):
@@ -152,8 +278,13 @@ def check_python_package(package):
 def show_menu():
     """Menampilkan menu pilihan dengan animasi"""
     print(f"\n{Colors.CYAN}{'='*60}{Colors.RESET}")
-    print(f"{Colors.BOLD}{Colors.MAGENTA}PILIHAN INSTALASI HACKFORGE{Colors.RESET}")
+    print(f"{Colors.BOLD}{Colors.MAGENTA}𝓟𝓘𝓛𝓘𝓗𝓐𝓝 𝓘𝓝𝓢𝓣𝓐𝓛𝓐𝓢𝓘 𝓗𝓐𝓒𝓚𝓕𝓞𝓡𝓖𝓔{Colors.RESET}")
     print(f"{Colors.CYAN}{'='*60}{Colors.RESET}")
+    
+    # Check sound availability
+    sound_available = SoundPlayer.check_sound_dependencies()
+    sound_status = f"{Colors.GREEN}🔊 Sound: ON{Colors.RESET}" if sound_available else f"{Colors.RED}🔇 Sound: OFF{Colors.RESET}"
+    print(f"          {sound_status}")
     
     # Animasi menu items
     menu_items = [
@@ -171,12 +302,13 @@ def show_menu():
         try:
             choice = input(f"\n{Colors.YELLOW}Pilih opsi (1-4): {Colors.RESET}").strip()
             if choice in ['1', '2', '3', '4']:
-                animate_selection(int(choice))
                 return int(choice)
             else:
                 print(f"{Colors.RED}Pilihan tidak valid! Silakan pilih 1-4.{Colors.RESET}")
+                SoundPlayer.play_complex_sound("error")
         except KeyboardInterrupt:
             print(f"\n{Colors.RED}Operasi dibatalkan.{Colors.RESET}")
+            SoundPlayer.play_complex_sound("error")
             sys.exit(1)
 
 def fix_dnspython_issue():
@@ -195,6 +327,7 @@ def fix_dnspython_issue():
         if success:
             if check_python_package("dnspython"):
                 print(f"{Colors.GREEN}✓ Issue dnspython berhasil diperbaiki!{Colors.RESET}")
+                SoundPlayer.play_complex_sound("success")
                 return True
     return False
 
@@ -265,6 +398,7 @@ def install_from_requirements():
     
     if not os.path.exists(requirements_file):
         print(f"{Colors.RED}✗ File {requirements_file} tidak ditemukan!{Colors.RESET}")
+        SoundPlayer.play_complex_sound("error")
         print(f"{Colors.YELLOW}Membuat file requirements.txt...{Colors.RESET}")
         
         requirements_content = """requests>=2.28.0
@@ -278,6 +412,7 @@ beautifulsoup4>=4.11.0
         with open(requirements_file, 'w') as f:
             f.write(requirements_content)
         print(f"{Colors.GREEN}✓ File requirements.txt berhasil dibuat{Colors.RESET}")
+        SoundPlayer.play_complex_sound("success")
     
     # Step 1-3: System preparation
     if os.name != 'nt':
@@ -328,6 +463,7 @@ def check_and_fix_dependencies():
     
     if missing_packages:
         print(f"{Colors.YELLOW}⚠️  Beberapa dependencies tidak ditemukan: {', '.join(missing_packages)}{Colors.RESET}")
+        SoundPlayer.play_complex_sound("warning")
         
         if "dnspython" in missing_packages:
             print(f"{Colors.YELLOW}🔧 Mencoba memperbaiki dnspython secara otomatis...{Colors.RESET}")
@@ -347,6 +483,7 @@ def check_and_fix_dependencies():
                         fix_dnspython_issue()
     else:
         print(f"{Colors.GREEN}✓ Semua dependencies dasar terinstall dengan baik{Colors.RESET}")
+        SoundPlayer.play_complex_sound("success")
 
 def run_hackforge():
     """Jalankan HackForge langsung"""
@@ -373,6 +510,7 @@ def run_hackforge():
         if os.path.exists(file):
             main_file = file
             print(f"{Colors.GREEN}✓ Ditemukan: {file}{Colors.RESET}")
+            SoundPlayer.play_complex_sound("success")
             break
     
     if main_file:
@@ -387,15 +525,20 @@ def run_hackforge():
         
         time.sleep(1)
         
+        # Play startup sound
+        SoundPlayer.play_complex_sound("startup")
+        
         # Jalankan file
         try:
             os.system(f"python {main_file}")
         except Exception as e:
             print(f"{Colors.RED}❌ Error saat menjalankan: {e}{Colors.RESET}")
+            SoundPlayer.play_complex_sound("error")
             print(f"{Colors.YELLOW}Coba jalankan manual: python {main_file}{Colors.RESET}")
         
     else:
         print(f"\n{Colors.RED}❌ File main HackForge tidak ditemukan!{Colors.RESET}")
+        SoundPlayer.play_complex_sound("error")
         print(f"{Colors.YELLOW}File yang dicari:{Colors.RESET}")
         for file in possible_files:
             print(f"  {Colors.WHITE}- {file}{Colors.RESET}")
@@ -416,7 +559,8 @@ def show_summary(installed, total):
     
     if installed == total:
         print(f"\n{Colors.GREEN}🎉 Semua dependencies berhasil diinstall!{Colors.RESET}")
-        # Celebration animation
+        # Celebration animation dengan sound
+        SoundPlayer.play_complex_sound("complete")
         for _ in range(3):
             for char in ["🎉", "🎊", "✨"]:
                 print(f"\r{char} {Colors.GREEN}SUKSES!{Colors.RESET}", end="", flush=True)
@@ -424,14 +568,40 @@ def show_summary(installed, total):
         print()
     else:
         print(f"\n{Colors.YELLOW}⚠️  Beberapa packages gagal diinstall.{Colors.RESET}")
+        SoundPlayer.play_complex_sound("warning")
         print(f"{Colors.YELLOW}   Anda masih bisa menjalankan tool, tetapi beberapa fitur mungkin tidak bekerja.{Colors.RESET}")
+
+def check_sound_installation():
+    """Cek dan install sound dependencies jika diperlukan"""
+    print(f"\n{Colors.BLUE}[SOUND] Memeriksa fitur sound...{Colors.RESET}")
+    
+    if SoundPlayer.check_sound_dependencies():
+        print(f"{Colors.GREEN}✓ Fitur sound tersedia{Colors.RESET}")
+        return True
+    else:
+        print(f"{Colors.YELLOW}⚠️  Fitur sound tidak tersedia{Colors.RESET}")
+        print(f"{Colors.WHITE}   Untuk mengaktifkan sound, install termux-api:{Colors.RESET}")
+        print(f"{Colors.WHITE}   pkg install termux-api{Colors.RESET}")
+        
+        install_sound = input(f"\n{Colors.YELLOW}Install termux-api sekarang? (y/N): {Colors.RESET}").strip().lower()
+        if install_sound in ['y', 'yes']:
+            success, output = run_command("pkg install termux-api -y", "Install termux-api")
+            if success:
+                print(f"{Colors.GREEN}✓ termux-api berhasil diinstall!{Colors.RESET}")
+                print(f"{Colors.YELLOW}   Pastikan Termux API app terinstall di Android.{Colors.RESET}")
+                return True
+        return False
 
 def main():
     try:
         show_ascii_art()
         
+        # Cek fitur sound
+        sound_available = check_sound_installation()
+        
         while True:
             choice = show_menu()
+            animate_selection(choice)
             
             if choice == 1:
                 installed, total = install_manual()
@@ -457,7 +627,8 @@ def main():
                 
             elif choice == 4:
                 print(f"\n{Colors.YELLOW}👋 Terima kasih! Keluar dari installer.{Colors.RESET}")
-                # Exit animation
+                # Exit animation dengan sound
+                SoundPlayer.play_complex_sound("success")
                 for char in ["👋", "😊", "👍"]:
                     print(f"\r{char} Sampai jumpa...", end="", flush=True)
                     time.sleep(0.5)
@@ -466,9 +637,11 @@ def main():
                 
     except KeyboardInterrupt:
         print(f"\n\n{Colors.RED}❌ Instalasi dibatalkan oleh user{Colors.RESET}")
+        SoundPlayer.play_complex_sound("error")
         sys.exit(1)
     except Exception as e:
         print(f"\n\n{Colors.RED}❌ Error: {e}{Colors.RESET}")
+        SoundPlayer.play_complex_sound("error")
         sys.exit(1)
 
 if __name__ == "__main__":
