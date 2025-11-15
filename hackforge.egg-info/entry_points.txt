@@ -1,2 +1,0 @@
-[console_scripts]
-hackforge = hackforge.main:run_cli

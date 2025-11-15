@@ -5,7 +5,7 @@ with open(os.path.join(here, 'README.md'), 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name="hackforge",
+    name="lioncix",
     version="2.8.7",
     author="Dwi Bakti N Dev",
     author_email="dwibakti76@gmail.com",
@@ -27,12 +27,12 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "hackforge = hackforge.main:run_cli", 
+            "lioncix = lioncix.gui:run_cli", 
         ],
     },
     include_package_data=True,
     package_data={
-        "hackforge": ["*.ico", "*.png"],
+        "lioncix": ["*.ico", "*.png"],
     },
     classifiers=[
         "Programming Language :: Python :: 3",

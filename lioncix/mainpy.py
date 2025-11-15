@@ -223,7 +223,6 @@ def show_ascii_art():
 ║              ▒░▓▓▓▓░░░░░░░░▒▓▓▓░▒▒▒▓             ║
 ║               ▒▓▓▓▓▒▒▒▒░░▒▓▓▓▓▒▒░░░▒             ║         
 ║                                                  ║
-║                                                  ║
 ║              █░░ █ █▀█ █▄░█ █▀▀ █ ▀▄▀            ║
 ║              █▄▄ █ █▄█ █░▀█ █▄▄ █ █░█            ║
 ║                                                  ║
@@ -807,17 +806,17 @@ def main():
                 
             elif choice == 4:
                 # Jalankan web/main.py
-                run_python_script("lioncix/server.py", "Web Script")
+                run_python_script("server.py", "Web Script")
                 break
                 
             elif choice == 5:
                 # Jalankan main/main.py
-                run_python_script("lioncix/main/main.py", "Main Script")
+                run_python_script("main/main.py", "Main Script")
                 break
             
             elif choice == 6:
                 # Jalankan Token/main.py
-                run_python_script("lioncix/Token/main.py", "Main Script")
+                run_python_script("Token/main.py", "Main Script")
                 break
                 
             elif choice == 7:

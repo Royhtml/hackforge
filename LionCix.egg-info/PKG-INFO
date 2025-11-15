@@ -1,3 +1,37 @@
+Metadata-Version: 2.4
+Name: lioncix
+Version: 2.8.7
+Summary:  Hacking Tools Website Dark Web Responsible web security assessment toolkit — safe scanning, reporting, and remediation guidance
+Home-page: https://github.com/royhtml
+Author: Dwi Bakti N Dev
+Author-email: dwibakti76@gmail.com
+Project-URL: Profile, https://profiledwibaktindev.netlify.app/
+Project-URL: ich.io, https://royhtml.itch.io/
+Project-URL: Facebook, https://www.facebook.com/Royhtml
+Project-URL: Webtoons, https://www.webtoons.com/id/canvas/mariadb-hari-senin/episode-4-coding-championship/viewer?title_no=1065164&episode_no=4
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Security :: Vulnerability Scanning
+Classifier: Intended Audience :: Developers
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: license.md
+Requires-Dist: pillow>=8.0
+Requires-Dist: pyinstaller>=4.0
+Requires-Dist: pyqt5>=5.15
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
 ## 📸 LionCix HackForge Launcher
 
 | LionCix | HackForge | Launcher |
